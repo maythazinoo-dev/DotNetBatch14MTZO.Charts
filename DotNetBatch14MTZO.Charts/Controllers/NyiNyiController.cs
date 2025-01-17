@@ -4,15 +4,16 @@ namespace DotNetBatch14MTZO.Charts.Controllers
 {
     public class NyiNyiController : Controller
     {
-        [ActionName("BarChart")]
+        [ActionName("barchart")]
         public IActionResult BarChart()
         {
             return View();
         }
 
-        [ActionName("MonopieChart")]
-        public IActionResult MonopieChart()
+        [ActionName("piechart")]
+        public IActionResult PieChart()
         {
+            Console.WriteLine("PieChart action hit");
             return View();
         }
     }
