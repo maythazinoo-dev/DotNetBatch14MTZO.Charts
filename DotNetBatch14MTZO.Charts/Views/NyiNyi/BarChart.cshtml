@@ -1,4 +1,10 @@
-﻿<div id="chart"></div>
+﻿
+
+@{
+   
+}
+
+<div id="chart"></div>
 
 @section scripts {
  
@@ -6,8 +12,7 @@
 
     <script>
 
-        var options = {
-          series: [
+        const _series =  [
           {
             name: 'Actual',
             data: [
@@ -94,7 +99,11 @@
               }
             ]
           }
-        ],
+        ];
+        
+
+        var options = {
+          series: _series,
           chart: {
           height: 350,
           type: 'bar'

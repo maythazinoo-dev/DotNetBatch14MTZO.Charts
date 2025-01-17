@@ -9,5 +9,11 @@ namespace DotNetBatch14MTZO.Charts.Controllers
         {
             return View();
         }
+
+        [ActionName("MonopieChart")]
+        public IActionResult MonopieChart()
+        {
+            return View();
+        }
     }
 }
