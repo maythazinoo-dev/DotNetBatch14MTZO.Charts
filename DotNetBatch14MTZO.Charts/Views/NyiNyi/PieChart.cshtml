@@ -1,16 +1,27 @@
-﻿<div>
+﻿@using DotNetBatch14MTZO.Charts.Models.NyiNyi
+@using Newtonsoft.Json
+
+@{
+    var labels = Model.Labels;
+    var data = Model.Data;
+}
+
+<div>
     <canvas id="piechart"></canvas>
 </div>
 
 @section scripts {
-   
     <script>
-        const ctx = document.getElementById('piechart').getContext('2d');
-        const data = {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+       
+        const labels = @Html.Raw(JsonConvert.SerializeObject(labels));
+        const data = @Html.Raw(JsonConvert.SerializeObject(data));
+
+       
+        const chartData = {
+            labels: labels,
             datasets: [{
                 label: 'Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                data: data,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -31,9 +42,10 @@
             }]
         };
 
+      
         const config = {
             type: 'pie',
-            data: data,
+            data: chartData,
             options: {
                 responsive: true,
                 plugins: {
@@ -48,6 +60,8 @@
             }
         };
 
+       
+        const ctx = document.getElementById('piechart').getContext('2d');
         new Chart(ctx, config);
     </script>
 }
