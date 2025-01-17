@@ -1,0 +1,60 @@
+﻿@using DotNetBatch14MTZO.Charts.Models.AMO
+@using Newtonsoft.Json
+@using Newtonsoft.Json.Serialization
+@model BubbleChartModel
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var data = Model.Data;
+
+    DefaultContractResolver _contractResolver = new DefaultContractResolver
+            {
+                NamingStrategy = new CamelCaseNamingStrategy()
+            };
+
+    var _jsonSetting = new JsonSerializerSettings
+            {
+                ContractResolver = _contractResolver,
+                Formatting = Formatting.Indented
+            };
+}
+
+<canvas id="bubblechart" width="400" height="400"></canvas>
+
+@section scripts {
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+
+          const dataSets = @Html.Raw(JsonConvert.SerializeObject(data, _jsonSetting));
+
+          const ctx = document.getElementById('bubblechart');
+
+          const data = {
+          datasets: dataSets
+          }
+
+          const config = {
+          type: 'bubble',
+          data: data,
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                position: 'top',
+              },
+              title: {
+                display: true,
+                text: 'Chart.js Bubble Chart'
+              }
+            }
+          },
+        };
+
+        new Chart(ctx, config)
+
+    </script>
+}
